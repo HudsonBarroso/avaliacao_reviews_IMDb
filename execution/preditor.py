@@ -23,7 +23,7 @@ if uploaded_file:
 
 def user_input_features():
     data ={
-        'text':string_data,
+        'text':uploaded_file,
     }
 
     features = pd.DataFrame(data, index=[0])
@@ -70,10 +70,10 @@ df = pd.concat([input_df, review_test], axis=0)
 df = df[:1]
 
 # realizando a leitura do modelo salvo
-load_logisticRegression = pickle.load(open('./train/models/vectorizer.pkl', 'rb'))
-load_logisticRegression = pickle.load(open('./train/models/logistic_model.pkl', 'rb'))
+load_logisticRegression = pickle.load(open('logistic_model.pkl', 'rb'))
 
 # aplicando o modelo para realizar a previsão
+
 prediction = load_logisticRegression.predict(input_df)
 prediction_probability = load_logisticRegression.predict_proba(input_df)
 
