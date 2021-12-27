@@ -41,11 +41,11 @@ test_features = vectorizer.transform(test_data["text"])
 model = logistic_regression(training_features, test_features, train_data["sentiment"], test_data['sentiment'])
 
 # Salvando o modelo como pikkle
-import joblib
-joblib.dump(vectorizer, 'models/vectorizer.pkl', protocol=2)
-joblib.dump(model, 'models/logistic_model.pkl', protocol=2)
+import pickle
+pickle.dump(vectorizer, open('models/vectorizer.pkl', 'wb'))
+pickle.dump(model, open('models/logistic_model.pkl', 'wb'))
 
-
+# Função para classificação do novo review
 def pred_new(text):
     text = vectorizer.transform([text])
     result = model.predict(text)
@@ -54,10 +54,9 @@ def pred_new(text):
     return final
 
 # Realiza a predição de um novo review
-with open('4_4.txt', 'r') as file:
+with open('./input_new/4_4.txt', 'r') as file:
     data = file.read()
 print(data)
-
 pred_new(data)
 
 
