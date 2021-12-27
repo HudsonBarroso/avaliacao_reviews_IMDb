@@ -46,6 +46,19 @@ joblib.dump(vectorizer, 'models/vectorizer.pkl', protocol=2)
 joblib.dump(model, 'models/logistic_model.pkl', protocol=2)
 
 
+def pred_new(text):
+    text = vectorizer.transform([text])
+    result = model.predict(text)
+    final = '-1 Negative' if result[0] == -1 else '1 Positive'
+    print('Resultado de previsão para o review selecionado: ', final)
+    return final
+
+# Realiza a predição de um novo review
+with open('4_4.txt', 'r') as file:
+    data = file.read()
+print(data)
+
+pred_new(data)
 
 
 
